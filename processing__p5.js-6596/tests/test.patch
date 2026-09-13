@@ -1,0 +1,31 @@
+diff --git a/.iid/f2p.cjs b/.iid/f2p.cjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..28cdc18e5d7cb58dbdeaadb98a47c5ed3b9cccb7
+--- /dev/null
++++ b/.iid/f2p.cjs
+@@ -0,0 +1,25 @@
++module.exports=async h=>{
++  for(const mode of ['BLUR','INVERT']) await h.check('F2P::lit-framebuffer-filter-'+mode,async()=>{
++  const r=await h.page.evaluate(mode=>new Promise((resolve,reject)=>{
++    window.__iidScene=new p5(p=>{
++      p.setup=()=>{
++        try {
++          p.createCanvas(96,96,p.WEBGL);p.pixelDensity(1);p.noLoop();
++          const fb=p.createFramebuffer({width:96,height:96,density:1});
++          fb.begin();p.background(0);p.lights();p.specularMaterial(128);p.noStroke();p.fill(255,0,0);p.torus(22,8,24,12);
++          p.filter(p[mode],mode==='BLUR'?2:undefined);fb.end();
++          p.clear();p.noLights();p.image(fb,-48,-48,96,96);p.loadPixels();
++          const values=[];for(let i=0;i<p.pixels.length;i+=4)values.push(p.pixels[i]);
++          resolve({min:Math.min(...values),max:Math.max(...values),dark:values.filter(x=>x<30).length/values.length,
++            bright:values.filter(x=>x>80).length/values.length});
++        }catch(e){reject(e);}
++      };
++    });
++  }),mode);
++  h.fs.writeFileSync(h.out+'/pixels-'+mode+'.json',JSON.stringify(r));
++  await h.page.screenshot({path:h.out+'/filter-'+mode+'.png'});
++  await h.page.evaluate(()=>window.__iidScene.remove());
++  h.assert.ok(r.max-r.min>40,'Filtered lit framebuffer must retain scene contrast instead of a uniform rectangle');
++  h.assert.ok(r.dark>0.05&&r.bright>0.05,'Filtered framebuffer must contain both scene and background regions');
++  });
++};

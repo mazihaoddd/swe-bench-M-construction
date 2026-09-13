@@ -1,0 +1,26 @@
+schema_version = "1.2"
+
+[task]
+name = "swe-bench-multimodal/processing__p5.js-6596"
+description = "Resolve the visual GitHub issue in /testbed: processing__p5.js-6596"
+authors = [{ name = "User (explicit approval in conversation)" }]
+keywords = ["swe-bench", "swe-bench-multimodal", "javascript", "agentic"]
+
+[metadata]
+benchmark = "SWE-bench Multimodal"
+repo = "processing/p5.js"
+instance_id = "processing__p5.js-6596"
+
+[environment]
+build_timeout_sec = 3600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 20480
+allow_internet = false
+
+[agent]
+timeout_sec = 7200.0
+override_setup_timeout_sec = 1800.0
+
+[verifier]
+timeout_sec = 720.0

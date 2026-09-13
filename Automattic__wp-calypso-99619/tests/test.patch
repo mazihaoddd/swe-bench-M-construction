@@ -1,0 +1,27 @@
+diff --git a/.iid/f2p.cjs b/.iid/f2p.cjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..2206402623f19ed4c9e52d5600e32147729c47c2
+--- /dev/null
++++ b/.iid/f2p.cjs
+@@ -0,0 +1,21 @@
++module.exports=async({page,check,assert,out})=>{
++  for(const free of [true,false]) await check('F2P::notice-background-'+(free?'free':'standard'),async()=>{
++    await page.evaluate(free=>window.renderNotice({siteId:123,hasFreeStats:free,isOdysseyStats:true}),free);
++    const display=await page.evaluate(()=>{
++      const el=document.querySelector('.inner-notice-container');
++      const c=el&&getComputedStyle(el);
++      return {present:!!el,background:c?.backgroundColor,parent:getComputedStyle(document.body).backgroundColor,
++        title:el?.querySelector('h3')?.textContent,button:el?.querySelector('.notice-banner__action-button')?.textContent,
++        link:el?.querySelector('.notice-banner__action-link')?.getAttribute('href')};
++    });
++    await page.screenshot({path:out+'/notice-'+free+'.png'});
++    assert.ok(display.present,'Stats upgrade notice must remain visible');
++    assert.ok(display.background==='rgba(0, 0, 0, 0)'||display.background===display.parent,
++      'Notice wrapper must not paint the contrasting off-white band shown in the issue');
++    assert.ok(display.title.includes('Jetpack Stats'));
++    assert.equal(display.button,'Upgrade my Stats');
++    assert.ok(display.link.includes('jetpack.com/redirect/'));
++    await page.click('[aria-label="Dismiss"]');
++    await page.waitForFunction(()=>!document.querySelector('.inner-notice-container'));
++  });
++};

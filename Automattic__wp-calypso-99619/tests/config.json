@@ -1,0 +1,110 @@
+{
+  "FAIL_TO_PASS": [
+    "F2P::notice-background-free",
+    "F2P::notice-background-standard"
+  ],
+  "PASS_TO_PASS": [
+    "P2P::removeStatsPurchaseSuccessParam should return the original path if nothing removed",
+    "P2P::removeStatsPurchaseSuccessParam should return the path with the statsPurchaseSuccess in GET params removed",
+    "P2P::removeStatsPurchaseSuccessParam should return the path with the statsPurchaseSuccess in hash removed",
+    "P2P::removeStatsPurchaseSuccessParam should return the path with the statsPurchaseSuccess in hash and query removed"
+  ],
+  "command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "full"
+  ],
+  "baseline_command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "baseline"
+  ],
+  "log_parser": {
+    "kind": "json",
+    "report_path": ".iid-results/results.json"
+  },
+  "test_timeout_sec": 600,
+  "protected_paths": [
+    ".iid/f2p.cjs"
+  ],
+  "p2p_files": [
+    "client/my-sites/stats/stats-notices/lib/test/remove-stats-purchase-success-param.js"
+  ],
+  "f2p_cases": {
+    "F2P::notice-background-free": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "图中升级通知位于 Jetpack Traffic 顶部；浅灰背景从上方延伸到通知底边后突然切换，形成类似缺少底部间距的色带。",
+      "failure_regex": "Notice wrapper must not paint"
+    },
+    "F2P::notice-background-standard": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "图中升级通知位于 Jetpack Traffic 顶部；浅灰背景从上方延伸到通知底边后突然切换，形成类似缺少底部间距的色带。",
+      "failure_regex": "Notice wrapper must not paint"
+    }
+  },
+  "fixture_sha256": {},
+  "repo": "Automattic/wp-calypso",
+  "instance_id": "Automattic__wp-calypso-99619",
+  "base_commit": "2a38a766015321ab15c12b45cea53f0203bce5bd",
+  "images": [
+    {
+      "source_url": "https://github.com/user-attachments/assets/38f41f0a-d7b7-42f9-af6c-a1f7547ee98f",
+      "repo_path": "assets/Automattic__wp-calypso-99619/issue-01.png",
+      "width": 2736,
+      "height": 926,
+      "format": "PNG",
+      "sha256": "e7db9cd5b5e31626c3cd70f47775855b455dcbf6b4030db29c564de555fa7907",
+      "role": "actual",
+      "visual_evidence": "图中升级通知位于 Jetpack Traffic 顶部；浅灰背景从上方延伸到通知底边后突然切换，形成类似缺少底部间距的色带。",
+      "information_gain": "图片识别具体升级通知及其所在 Odyssey 页面，表明异常来自容器背景范围，而非按钮内部间距。",
+      "without_image": "不看图片，图片识别具体升级通知及其所在 Odyssey 页面，表明异常来自容器背景范围，而非按钮内部间距。",
+      "linked_test_ids": [
+        "F2P::notice-background-free",
+        "F2P::notice-background-standard"
+      ]
+    }
+  ],
+  "resources": [],
+  "protected_files": {
+    ".iid/f2p.cjs": null,
+    "client/my-sites/stats/stats-notices/lib/test/remove-stats-purchase-success-param.js": "442e2e2f89415bfd40c587dc4d6a84107a4f4b45ef00a1ae1f2de987ab86ccc9"
+  },
+  "source": {
+    "repo": "Automattic/wp-calypso",
+    "pr_number": 99619,
+    "created_at": "2025-02-12T01:49:39Z",
+    "merged_at": "2025-02-12T13:56:06Z",
+    "cutoff": "2026-09-13T00:00:00Z",
+    "pr_url": "https://github.com/Automattic/wp-calypso/pull/99619",
+    "base_commit": "2a38a766015321ab15c12b45cea53f0203bce5bd",
+    "head_commit": "f9fc2f67d129562b9bbd836bf924cbb80e3e7e74",
+    "issue_urls": [
+      "https://github.com/Automattic/jetpack/issues/41230"
+    ],
+    "root_task_id": "https://github.com/Automattic/jetpack/issues/41230",
+    "retrieved_at": "2026-09-13T02:36:11.752676+00:00"
+  },
+  "review": {
+    "approved": true,
+    "reviewer": "User (explicit approval in conversation)",
+    "reviewed_at": "2026-09-13T03:40:20.482770+00:00",
+    "checks": [
+      "atomic_production_fix",
+      "dedup_reviewed",
+      "gold_matches_upstream",
+      "p2p_preserved",
+      "pre_fix_context",
+      "real_issue_pr",
+      "unambiguous_requirements",
+      "visual_information_gain"
+    ],
+    "subject_sha256": "3a43ebeaa1ef7f09455a3faec434767009e669d44f13e984afa0da6d5c74c0e6"
+  },
+  "tags": {
+    "framework": "React",
+    "renderer": "DOM/CSS",
+    "defect": "通知背景覆盖范围",
+    "difficulty": "easy"
+  },
+  "patch_fingerprint": "a201b5e7503b5e61c606c0e6c96179ecc133008ca49aea044daea50df49362da"
+}

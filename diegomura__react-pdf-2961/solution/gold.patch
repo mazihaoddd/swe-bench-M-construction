@@ -1,0 +1,64 @@
+diff --git a/packages/layout/src/svg/inheritProps.js b/packages/layout/src/svg/inheritProps.js
+index 65aa7ada5da9a4d9524cbe6eb63d6f479281495b..478ea7c5f35df027eeb170110b5aac16f370e4a6 100644
+--- a/packages/layout/src/svg/inheritProps.js
++++ b/packages/layout/src/svg/inheritProps.js
+@@ -43,6 +43,13 @@ const inheritProps = (node) => {
+   const children = node.children.map((child) => {
+     const props = Object.assign({}, inheritedProps, child.props || {});
+     const newChild = Object.assign({}, child, { props });
++
++    // Do not inherit "x" for <tspan> elements from <text> parent
++    // If no explicit x is provided, the x-offset will be calculated in layoutText.js
++    if (child.type === 'TSPAN') {
++      newChild.props.x = child.props.x;
++    }
++
+     return inheritProps(newChild);
+   });
+ 
+diff --git a/packages/layout/src/svg/layoutText.js b/packages/layout/src/svg/layoutText.js
+index f93d75b579e1c31eacf7fda7de26712d8d6196f6..2f8f909517d9c6f27d5c2eadc7cb34aa5dea7bd7 100644
+--- a/packages/layout/src/svg/layoutText.js
++++ b/packages/layout/src/svg/layoutText.js
+@@ -98,10 +98,10 @@ const AlmostInfinity = 999999999999;
+ 
+ const shrinkWhitespaceFactor = { before: -0.5, after: -0.5 };
+ 
+-const layoutTspan = (fontStore) => (node) => {
++const layoutTspan = (fontStore) => (node, xOffset) => {
+   const attributedString = getAttributedString(fontStore, node);
+ 
+-  const x = node.props?.x || 0;
++  const x = node.props.x === undefined ? xOffset : node.props.x;
+   const y = node.props?.y || 0;
+ 
+   const container = { x, y, width: AlmostInfinity, height: AlmostInfinity };
+@@ -120,7 +120,27 @@ const layoutTspan = (fontStore) => (node) => {
+ const layoutText = (fontStore, node) => {
+   if (!node.children) return node;
+ 
+-  const children = node.children.map(layoutTspan(fontStore));
++  let currentXOffset = node.props?.x || 0;
++
++  const layoutFn = layoutTspan(fontStore);
++
++  const children = node.children.map((child, index) => {
++    // If the <tspan> has no explicit x position, and it's not the last child of the <text> node, and it has a value, add a space to the end of the value
++    if (
++      child.props.x === undefined &&
++      index < node.children.length - 1 &&
++      child.children?.[0]?.value
++    ) {
++      // eslint-disable-next-line no-param-reassign
++      child.children[0].value += ' ';
++    }
++
++    const childWithLayout = layoutFn(child, currentXOffset);
++
++    currentXOffset += childWithLayout.lines[0].xAdvance;
++
++    return childWithLayout;
++  });
+ 
+   return Object.assign({}, node, { children });
+ };

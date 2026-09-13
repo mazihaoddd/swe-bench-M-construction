@@ -1,0 +1,13 @@
+diff --git a/client/my-sites/stats/stats-notices/do-you-love-jetpack-stats-notice.tsx b/client/my-sites/stats/stats-notices/do-you-love-jetpack-stats-notice.tsx
+index 4415d1e066e6616dd2bc40e469ce03c7afbf5b3d..cf08961438b53ff606241bc0f0fe5774a4f44d67 100644
+--- a/client/my-sites/stats/stats-notices/do-you-love-jetpack-stats-notice.tsx
++++ b/client/my-sites/stats/stats-notices/do-you-love-jetpack-stats-notice.tsx
+@@ -149,7 +149,7 @@ const DoYouLoveJetpackStatsNotice = ( {
+ 	return (
+ 		<div
+ 			className={ `inner-notice-container has-odyssey-stats-bg-color ${
+-				! isOdysseyStats && 'inner-notice-container--calypso'
++				! isOdysseyStats ? 'inner-notice-container--calypso' : ''
+ 			}` }
+ 		>
+ 			<NoticeBanner

@@ -1,0 +1,110 @@
+{
+  "FAIL_TO_PASS": [
+    "F2P::lit-framebuffer-filter-BLUR",
+    "F2P::lit-framebuffer-filter-INVERT"
+  ],
+  "PASS_TO_PASS": [
+    "P2P::p5.Framebuffer sizing auto-sized framebuffers change size with their canvas",
+    "P2P::p5.Framebuffer sizing manually-sized framebuffers do not change size with their canvas",
+    "P2P::p5.Framebuffer sizing resizing framebuffers can be resized",
+    "P2P::p5.Framebuffer sizing resizing resizing a framebuffer turns off auto-sizing"
+  ],
+  "command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "full"
+  ],
+  "baseline_command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "baseline"
+  ],
+  "log_parser": {
+    "kind": "json",
+    "report_path": ".iid-results/results.json"
+  },
+  "test_timeout_sec": 600,
+  "protected_paths": [
+    ".iid/f2p.cjs"
+  ],
+  "p2p_files": [
+    "test/unit/webgl/p5.Framebuffer.js"
+  ],
+  "f2p_cases": {
+    "F2P::lit-framebuffer-filter-BLUR": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "左侧代码显示 framebuffer 内先绘制受光照影响的红色 torus 再执行 BLUR；右侧实际变成均匀粉色矩形。",
+      "failure_regex": "Filtered lit framebuffer must retain|Filtered framebuffer must contain"
+    },
+    "F2P::lit-framebuffer-filter-INVERT": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "左侧代码显示 framebuffer 内先绘制受光照影响的红色 torus 再执行 BLUR；右侧实际变成均匀粉色矩形。",
+      "failure_regex": "Filtered lit framebuffer must retain|Filtered framebuffer must contain"
+    }
+  },
+  "fixture_sha256": {},
+  "repo": "processing/p5.js",
+  "instance_id": "processing__p5.js-6596",
+  "base_commit": "37d3324b457b177319ed65468201f2806a66eff5",
+  "images": [
+    {
+      "source_url": "https://github.com/processing/p5.js/assets/127239756/ca1709f4-7c0a-4388-ac19-839768ba8e88",
+      "repo_path": "assets/processing__p5.js-6596/issue-01.png",
+      "width": 1393,
+      "height": 665,
+      "format": "PNG",
+      "sha256": "b80cf6b54b9ac70df2563630fb1b6176492a561cfebe62567562e2c0813dab3b",
+      "role": "actual",
+      "visual_evidence": "左侧代码显示 framebuffer 内先绘制受光照影响的红色 torus 再执行 BLUR；右侧实际变成均匀粉色矩形。",
+      "information_gain": "图片提供可见场景轮廓应被保留的线索，区分整个滤镜覆盖面错误着色与仅仅缺少高光的情况。",
+      "without_image": "不看图片，图片提供可见场景轮廓应被保留的线索，区分整个滤镜覆盖面错误着色与仅仅缺少高光的情况。",
+      "linked_test_ids": [
+        "F2P::lit-framebuffer-filter-BLUR",
+        "F2P::lit-framebuffer-filter-INVERT"
+      ]
+    }
+  ],
+  "resources": [],
+  "protected_files": {
+    ".iid/f2p.cjs": null,
+    "test/unit/webgl/p5.Framebuffer.js": "3bb0dd3ff259d345f343efe315d2de2181edf8b54e0fd7af4cbf48343d9c9959"
+  },
+  "source": {
+    "repo": "processing/p5.js",
+    "pr_number": 6596,
+    "created_at": "2023-11-29T14:35:34Z",
+    "merged_at": "2023-11-30T13:53:25Z",
+    "cutoff": "2026-09-13T00:00:00Z",
+    "pr_url": "https://github.com/processing/p5.js/pull/6596",
+    "base_commit": "37d3324b457b177319ed65468201f2806a66eff5",
+    "head_commit": "a465e44f297842e5df2cf4bf95e3d8af409071b7",
+    "issue_urls": [
+      "https://github.com/processing/p5.js/issues/6595"
+    ],
+    "root_task_id": "https://github.com/processing/p5.js/issues/6595",
+    "retrieved_at": "2026-09-13T02:35:07.795021+00:00"
+  },
+  "review": {
+    "approved": true,
+    "reviewer": "User (explicit approval in conversation)",
+    "reviewed_at": "2026-09-13T03:40:21.469373+00:00",
+    "checks": [
+      "atomic_production_fix",
+      "dedup_reviewed",
+      "gold_matches_upstream",
+      "p2p_preserved",
+      "pre_fix_context",
+      "real_issue_pr",
+      "unambiguous_requirements",
+      "visual_information_gain"
+    ],
+    "subject_sha256": "7f22c08932a7e638f691b841e4169a7524e83a8ae8ac7c23970c58860934523d"
+  },
+  "tags": {
+    "framework": "p5.js",
+    "renderer": "WebGL",
+    "defect": "滤镜后的三维场景",
+    "difficulty": "medium"
+  },
+  "patch_fingerprint": "edcd04c126106960d24424c12090bcd9af2a7f295220c5d58f30e27f7c71685e"
+}

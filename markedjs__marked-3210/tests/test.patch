@@ -1,0 +1,21 @@
+diff --git a/.iid/f2p.cjs b/.iid/f2p.cjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..d7ad640d4d62ce2d103200a8ce50bd9082f7a9e3
+--- /dev/null
++++ b/.iid/f2p.cjs
+@@ -0,0 +1,15 @@
++module.exports=async({marked,page,check,assert,out})=>{
++  for(const [name,fence] of [['backticks','```'],['tildes','~~~']]) {
++    await check('F2P::fenced-equals-'+name,async()=>{
++      const html=marked.parse('A paragraph\n'+fence+'\n=\n^ This is the faulty character\n'+fence+'\n');
++      await page.setContent(html);
++      const view=await page.evaluate(()=>({headings:document.querySelectorAll('h1,h2').length,
++        blocks:[...document.querySelectorAll('pre code')].map(e=>e.textContent),
++        paragraphs:[...document.querySelectorAll('p')].map(e=>e.textContent)}));
++      await page.screenshot({path:out+'/'+name+'.png'});
++      assert.equal(view.headings,0,'Fenced equals must not turn the preceding paragraph into a heading');
++      assert.deepEqual(view.blocks,['=\n^ This is the faulty character\n'],'Fenced contents must stay in one rendered code block');
++      assert.deepEqual(view.paragraphs,['A paragraph']);
++    });
++  }
++};

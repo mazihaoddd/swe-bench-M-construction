@@ -1,0 +1,134 @@
+{
+  "FAIL_TO_PASS": [
+    "F2P::inner-backdrop-top",
+    "F2P::inner-backdrop-bottom"
+  ],
+  "PASS_TO_PASS": [
+    "P2P::Core.scale should provide default scale label options",
+    "P2P::Core.scale displaying xAxis ticks with autoSkip=true should use autoSkip amount of ticks when maxTicksLimit is set to a larger number as autoSkip calculation",
+    "P2P::Core.scale displaying xAxis ticks with autoSkip=true should use maxTicksLimit amount of ticks when maxTicksLimit is set to a smaller number as autoSkip calculation"
+  ],
+  "command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "full"
+  ],
+  "baseline_command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "baseline"
+  ],
+  "log_parser": {
+    "kind": "json",
+    "report_path": ".iid-results/results.json"
+  },
+  "test_timeout_sec": 600,
+  "protected_paths": [
+    ".iid/f2p.cjs"
+  ],
+  "p2p_files": [
+    "test/specs/core.scale.tests.js",
+    "test/index.js"
+  ],
+  "f2p_cases": {
+    "F2P::inner-backdrop-top": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "期望图黄色矩形完整位于绿色 FOO 下方；实际图右端 FOO 在内侧、黄色背景却位于外侧。",
+      "failure_regex": "Rightmost inner label backdrop must cover"
+    },
+    "F2P::inner-backdrop-bottom": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "期望图黄色矩形完整位于绿色 FOO 下方；实际图右端 FOO 在内侧、黄色背景却位于外侧。",
+      "failure_regex": "Rightmost inner label backdrop must cover"
+    }
+  },
+  "fixture_sha256": {},
+  "repo": "chartjs/Chart.js",
+  "instance_id": "chartjs__Chart.js-11577",
+  "base_commit": "6516b0a150eebf3fb9eab596f89d63e27e1bc6d5",
+  "images": [
+    {
+      "source_url": "https://github.com/chartjs/Chart.js/assets/37180819/0c5af35c-1138-4c68-90e1-71bcde4561a6",
+      "repo_path": "assets/chartjs__Chart.js-11577/issue-01.png",
+      "width": 165,
+      "height": 112,
+      "format": "PNG",
+      "sha256": "d042ce2c5db8e441970b0b285fdcd3d26214e809ae9950cb7204446cec8446af",
+      "role": "expected",
+      "visual_evidence": "期望图黄色矩形完整位于绿色 FOO 下方；实际图右端 FOO 在内侧、黄色背景却位于外侧。",
+      "information_gain": "图片明确指出文字和背景谁正确、谁发生偏移，以及背景应覆盖文字的范围，减少坐标修复歧义。",
+      "without_image": "不看图片，图片明确指出文字和背景谁正确、谁发生偏移，以及背景应覆盖文字的范围，减少坐标修复歧义。",
+      "linked_test_ids": [
+        "F2P::inner-backdrop-top",
+        "F2P::inner-backdrop-bottom"
+      ]
+    },
+    {
+      "source_url": "https://github.com/chartjs/Chart.js/assets/37180819/edeb17f5-649e-4470-956a-5e56e113f6be",
+      "repo_path": "assets/chartjs__Chart.js-11577/issue-02.png",
+      "width": 88,
+      "height": 93,
+      "format": "PNG",
+      "sha256": "fbf875078ce447e573150914126524a045ff1fed5b341ebe28f9cc049685af2a",
+      "role": "actual",
+      "visual_evidence": "期望图黄色矩形完整位于绿色 FOO 下方；实际图右端 FOO 在内侧、黄色背景却位于外侧。",
+      "information_gain": "图片明确指出文字和背景谁正确、谁发生偏移，以及背景应覆盖文字的范围，减少坐标修复歧义。",
+      "without_image": "不看图片，图片明确指出文字和背景谁正确、谁发生偏移，以及背景应覆盖文字的范围，减少坐标修复歧义。",
+      "linked_test_ids": [
+        "F2P::inner-backdrop-top",
+        "F2P::inner-backdrop-bottom"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "repo_path": "assets/chartjs__Chart.js-11577/reproduce.cjs",
+      "source_url": "https://rxjs-jmjkfr.stackblitz.io/",
+      "sha256": "a46be6b365fc5221e2381540f5c825e56912042573ca3f54cdff54a44b9ee491",
+      "instructions": "Run node /testbed/assets/chartjs__Chart.js-11577/reproduce.cjs from /testbed; inspect .reproduction output. Uses the checked-out source and installed dependencies, with no network."
+    }
+  ],
+  "protected_files": {
+    ".iid/f2p.cjs": null,
+    "test/index.js": "347c824603955c2712b3ad999e8e33c346e5a4a529342415c36e5384cb73c626",
+    "test/specs/core.scale.tests.js": "8b1391fcf1de7c7a25ecc9f1d023f3a6ea78d467991b71d95380de15b2af5ddc"
+  },
+  "source": {
+    "repo": "chartjs/Chart.js",
+    "pr_number": 11577,
+    "created_at": "2023-11-09T23:03:09Z",
+    "merged_at": "2023-11-09T23:25:36Z",
+    "cutoff": "2026-09-13T00:00:00Z",
+    "pr_url": "https://github.com/chartjs/Chart.js/pull/11577",
+    "base_commit": "6516b0a150eebf3fb9eab596f89d63e27e1bc6d5",
+    "head_commit": "81fc6a48b77346f4589474f6dd013f5e9633a2bc",
+    "issue_urls": [
+      "https://github.com/chartjs/Chart.js/issues/11575"
+    ],
+    "root_task_id": "https://github.com/chartjs/Chart.js/issues/11575",
+    "retrieved_at": "2026-09-13T02:36:16.910094+00:00"
+  },
+  "review": {
+    "approved": true,
+    "reviewer": "User (explicit approval in conversation)",
+    "reviewed_at": "2026-09-13T03:40:20.287716+00:00",
+    "checks": [
+      "atomic_production_fix",
+      "dedup_reviewed",
+      "gold_matches_upstream",
+      "p2p_preserved",
+      "pre_fix_context",
+      "real_issue_pr",
+      "unambiguous_requirements",
+      "visual_information_gain"
+    ],
+    "subject_sha256": "54f6f45194445842c3d691f8a8c0f98ad8238dea1ec7ebf90d1325f53613d2f8"
+  },
+  "tags": {
+    "framework": "Canvas",
+    "renderer": "Canvas 2D",
+    "defect": "刻度背景定位",
+    "difficulty": "easy"
+  },
+  "patch_fingerprint": "9afec09e7d0d2d350cd003ad646c4c2bb1d67bce31fb7e4b5e5b25f164ae3b26"
+}

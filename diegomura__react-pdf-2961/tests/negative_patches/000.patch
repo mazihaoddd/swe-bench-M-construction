@@ -1,0 +1,18 @@
+diff --git a/packages/layout/src/svg/inheritProps.js b/packages/layout/src/svg/inheritProps.js
+index 65aa7ada5da9a4d9524cbe6eb63d6f479281495b..478ea7c5f35df027eeb170110b5aac16f370e4a6 100644
+--- a/packages/layout/src/svg/inheritProps.js
++++ b/packages/layout/src/svg/inheritProps.js
+@@ -43,6 +43,13 @@ const inheritProps = (node) => {
+   const children = node.children.map((child) => {
+     const props = Object.assign({}, inheritedProps, child.props || {});
+     const newChild = Object.assign({}, child, { props });
++
++    // Do not inherit "x" for <tspan> elements from <text> parent
++    // If no explicit x is provided, the x-offset will be calculated in layoutText.js
++    if (child.type === 'TSPAN') {
++      newChild.props.x = child.props.x;
++    }
++
+     return inheritProps(newChild);
+   });
+ 

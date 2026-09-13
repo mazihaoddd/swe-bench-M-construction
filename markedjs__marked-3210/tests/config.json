@@ -1,0 +1,159 @@
+{
+  "FAIL_TO_PASS": [
+    "F2P::fenced-equals-backticks",
+    "F2P::fenced-equals-tildes"
+  ],
+  "PASS_TO_PASS": [
+    "P2P::fences_breaking_paragraphs",
+    "P2P::fences_following_list",
+    "P2P::fences_following_nptable",
+    "P2P::fences_following_table"
+  ],
+  "command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "full"
+  ],
+  "baseline_command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "baseline"
+  ],
+  "log_parser": {
+    "kind": "json",
+    "report_path": ".iid-results/results.json"
+  },
+  "test_timeout_sec": 600,
+  "protected_paths": [
+    ".iid/f2p.cjs"
+  ],
+  "p2p_files": [
+    "test/specs/new/fences_breaking_paragraphs.md",
+    "test/specs/new/fences_breaking_paragraphs.html",
+    "test/specs/new/fences_following_list.md",
+    "test/specs/new/fences_following_list.html",
+    "test/specs/new/fences_following_nptable.md",
+    "test/specs/new/fences_following_nptable.html",
+    "test/specs/new/fences_following_table.md",
+    "test/specs/new/fences_following_table.html"
+  ],
+  "f2p_cases": {
+    "F2P::fenced-equals-backticks": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "截图对照显示第二段被放大成标题、反引号跑到段落中；期望图保留普通段落与独立灰色代码块。",
+      "failure_regex": "Fenced equals must not turn"
+    },
+    "F2P::fenced-equals-tildes": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "截图对照显示第二段被放大成标题、反引号跑到段落中；期望图保留普通段落与独立灰色代码块。",
+      "failure_regex": "Fenced equals must not turn"
+    }
+  },
+  "fixture_sha256": {},
+  "repo": "markedjs/marked",
+  "instance_id": "markedjs__marked-3210",
+  "base_commit": "c831f3547e77cb8b4d560078d23bd936cf15d190",
+  "images": [
+    {
+      "source_url": "https://github.com/markedjs/marked/assets/7189823/b486060c-3ffa-4b66-82f4-e85275b06acb",
+      "repo_path": "assets/markedjs__marked-3210/issue-01.png",
+      "width": 1090,
+      "height": 498,
+      "format": "PNG",
+      "sha256": "af95932faaa73101de90f9d8f46755b984ffd17c96fb2eed6f4319ddbcb72a42",
+      "role": "actual",
+      "visual_evidence": "截图对照显示第二段被放大成标题、反引号跑到段落中；期望图保留普通段落与独立灰色代码块。",
+      "information_gain": "文字只说格式损坏，图片明确区分标题、段落和代码块的错误层级，以及等号应处于哪一个块中。",
+      "without_image": "不看图片，文字只说格式损坏，图片明确区分标题、段落和代码块的错误层级，以及等号应处于哪一个块中。",
+      "linked_test_ids": [
+        "F2P::fenced-equals-backticks",
+        "F2P::fenced-equals-tildes"
+      ]
+    },
+    {
+      "source_url": "https://github.com/markedjs/marked/assets/7189823/87272f7d-bea3-4264-934a-5f310a5b7637",
+      "repo_path": "assets/markedjs__marked-3210/issue-02.png",
+      "width": 1122,
+      "height": 394,
+      "format": "PNG",
+      "sha256": "49b21d43cab349e22c37f5dc28319eae8de8c3bd6a391f2ad47e34dc45da0478",
+      "role": "expected",
+      "visual_evidence": "截图对照显示第二段被放大成标题、反引号跑到段落中；期望图保留普通段落与独立灰色代码块。",
+      "information_gain": "文字只说格式损坏，图片明确区分标题、段落和代码块的错误层级，以及等号应处于哪一个块中。",
+      "without_image": "不看图片，文字只说格式损坏，图片明确区分标题、段落和代码块的错误层级，以及等号应处于哪一个块中。",
+      "linked_test_ids": [
+        "F2P::fenced-equals-backticks",
+        "F2P::fenced-equals-tildes"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "repo_path": "assets/markedjs__marked-3210/input-1.md",
+      "source_url": "https://marked.js.org/demo/?text=A%20markdown%20is%20perfectly%20fine%20like%20this%0A%0A%60%60%60%0A%3D%0A%60%60%60%0A%0ABut%20as%20soon%20as%20we%20don%27t%20have%20a%20blank%20line%20before%20the%20code%20block%2C%20it%20breaks%0A%60%60%60%0A%3D%0A%5E%20This%20is%20the%20faulty%20character%0A%0A%60%60%60%0A&options=%7B%0A%20%22async%22%3A%20false%2C%0A%20%22breaks%22%3A%20false%2C%0A%20%22extensions%22%3A%20null%2C%0A%20%22gfm%22%3A%20true%2C%0A%20%22hooks%22%3A%20null%2C%0A%20%22pedantic%22%3A%20false%2C%0A%20%22silent%22%3A%20false%2C%0A%20%22tokenizer%22%3A%20null%2C%0A%20%22walkTokens%22%3A%20null%0A%7D&version=12.0.0",
+      "sha256": "bcf9729458333072df9ef602eb369e44154832907dff0f6e4c9fe31b575791b3",
+      "instructions": "Run node /testbed/assets/markedjs__marked-3210/reproduce.cjs from /testbed; inspect .reproduction output. Uses the checked-out source and installed dependencies, with no network."
+    },
+    {
+      "repo_path": "assets/markedjs__marked-3210/input-2.md",
+      "source_url": "https://spec.commonmark.org/dingus/?text=A%20markdown%20is%20perfectly%20fine%20like%20this%0A%0A%60%60%60%0A%3D%0A%60%60%60%0A%0ABut%20as%20soon%20as%20we%20don%27t%20have%20a%20blank%20line%20before%20the%20code%20block%2C%20it%20breaks%0A%60%60%60%0A%3D%0A%5EThis%20is%20the%20faulty%20character%0A%0A%60%60%60%0A",
+      "sha256": "218bc9e5e57f4791932b82f11dcc919071de6b8ef5166840292fa47af1c48311",
+      "instructions": "Run node /testbed/assets/markedjs__marked-3210/reproduce.cjs from /testbed; inspect .reproduction output. Uses the checked-out source and installed dependencies, with no network."
+    },
+    {
+      "repo_path": "assets/markedjs__marked-3210/reproduce.cjs",
+      "source_url": "https://marked.js.org/demo/?text=A%20markdown%20is%20perfectly%20fine%20like%20this%0A%0A%60%60%60%0A%3D%0A%60%60%60%0A%0ABut%20as%20soon%20as%20we%20don%27t%20have%20a%20blank%20line%20before%20the%20code%20block%2C%20it%20breaks%0A%60%60%60%0A%3D%0A%5E%20This%20is%20the%20faulty%20character%0A%0A%60%60%60%0A&options=%7B%0A%20%22async%22%3A%20false%2C%0A%20%22breaks%22%3A%20false%2C%0A%20%22extensions%22%3A%20null%2C%0A%20%22gfm%22%3A%20true%2C%0A%20%22hooks%22%3A%20null%2C%0A%20%22pedantic%22%3A%20false%2C%0A%20%22silent%22%3A%20false%2C%0A%20%22tokenizer%22%3A%20null%2C%0A%20%22walkTokens%22%3A%20null%0A%7D&version=12.0.0",
+      "sha256": "554bda396c07f8d99aacfe3c53fb4bffcd6dbf53b351e9a34490365369f5190d",
+      "instructions": "Run node /testbed/assets/markedjs__marked-3210/reproduce.cjs from /testbed; inspect .reproduction output. Uses the checked-out source and installed dependencies, with no network."
+    }
+  ],
+  "protected_files": {
+    ".iid/f2p.cjs": null,
+    "test/specs/new/fences_breaking_paragraphs.html": "0b4660d6ebf83bdd492bdb94bc840adfa2fdbf44a98a53ef0a6627a3331f4e4f",
+    "test/specs/new/fences_breaking_paragraphs.md": "a857b21a8ede015ec3f69ed2f2e0483cd3300a64a05e3afd52c7723cf5d5d154",
+    "test/specs/new/fences_following_list.html": "98c84d9a406aeabb22cfa43efdd0e188c319c7a8ee2544e6cf73fe5976c342e6",
+    "test/specs/new/fences_following_list.md": "07ed63c9fb1741f1792a2c7bd3af4cce154b08112e9df101df7330ec026b5795",
+    "test/specs/new/fences_following_nptable.html": "4ce463e5f8f74f29e3495a408d88bcfcb89b886b62de581f28165edc60cd56e4",
+    "test/specs/new/fences_following_nptable.md": "d9cb72ce7063a1adad6390e9537fb753344eb9b30cf634a49f4b9f07fd1c2558",
+    "test/specs/new/fences_following_table.html": "4ce463e5f8f74f29e3495a408d88bcfcb89b886b62de581f28165edc60cd56e4",
+    "test/specs/new/fences_following_table.md": "1b0302c074b70a9e756c701f8b1a794a65606bd5756e83a49f3a76e7069e0516"
+  },
+  "source": {
+    "repo": "markedjs/marked",
+    "pr_number": 3210,
+    "created_at": "2024-03-04T03:01:19Z",
+    "merged_at": "2024-03-06T07:37:00Z",
+    "cutoff": "2026-09-13T00:00:00Z",
+    "pr_url": "https://github.com/markedjs/marked/pull/3210",
+    "base_commit": "c831f3547e77cb8b4d560078d23bd936cf15d190",
+    "head_commit": "3354a16b2e10df50480cec0a8cfbd379b775d660",
+    "issue_urls": [
+      "https://github.com/markedjs/marked/issues/3208"
+    ],
+    "root_task_id": "https://github.com/markedjs/marked/issues/3208",
+    "retrieved_at": "2026-09-13T02:35:19.836329+00:00"
+  },
+  "review": {
+    "approved": true,
+    "reviewer": "User (explicit approval in conversation)",
+    "reviewed_at": "2026-09-13T03:40:19.968845+00:00",
+    "checks": [
+      "atomic_production_fix",
+      "dedup_reviewed",
+      "gold_matches_upstream",
+      "p2p_preserved",
+      "pre_fix_context",
+      "real_issue_pr",
+      "unambiguous_requirements",
+      "visual_information_gain"
+    ],
+    "subject_sha256": "8482b7812326dc8ab93328381543d9fce7e8c09a8e7b8140bb86f3e22eb52ba0"
+  },
+  "tags": {
+    "framework": "TypeScript",
+    "renderer": "HTML",
+    "defect": "代码块层级",
+    "difficulty": "easy"
+  },
+  "patch_fingerprint": "ac58f45e6e8da4b62ca7fdd93d150a74b3995abe450fc6b575507481fa2d4cc1"
+}

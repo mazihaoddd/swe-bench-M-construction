@@ -1,0 +1,25 @@
+diff --git a/.iid/f2p.cjs b/.iid/f2p.cjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..fa31b278605807fb8444fe1a81a52014233c802c
+--- /dev/null
++++ b/.iid/f2p.cjs
+@@ -0,0 +1,19 @@
++module.exports=async({inherit,layout,check,assert,fs,out})=>{
++  for(const [name,x,fontSize] of [['default-size',10,18],['larger-font',30,26]]) {
++    await check('F2P::sequential-colored-tspans-'+name,()=>{
++      const node={type:'TEXT',props:{x,y:30,fontSize,fontFamily:'Helvetica'},children:
++        [['test','black'],['test','red'],['1234','black']].map(([value,fill])=>({type:'TSPAN',props:{fill},
++          children:[{type:'TEXT_INSTANCE',value}]}))};
++      const drawn=layout(null,inherit(node));
++      const lines=drawn.children.map(c=>c.lines[0]);
++      fs.writeFileSync(out+'/layout-'+name+'.json',JSON.stringify(lines.map(l=>({string:l.string,box:l.box,xAdvance:l.xAdvance,colors:l.runs.map(r=>r.attributes.color)})),null,2));
++      assert.equal(lines[0].box.x,x,'First tspan must start at the parent x');
++      for(let i=1;i<lines.length;i++) {
++        assert.ok(lines[i].box.x>=lines[i-1].box.x+lines[i-1].xAdvance-0.01,
++          'Adjacent colored tspans must advance horizontally without overlap');
++      }
++      assert.deepEqual(lines.map(l=>l.string.trim()),['test','test','1234']);
++      assert.deepEqual(lines.map(l=>l.runs[0].attributes.color),['black','red','black']);
++    });
++  }
++};

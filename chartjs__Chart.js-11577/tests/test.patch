@@ -1,0 +1,29 @@
+diff --git a/.iid/f2p.cjs b/.iid/f2p.cjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..3a556ec2459ed0ee13d4df85200b7981415f2c3f
+--- /dev/null
++++ b/.iid/f2p.cjs
+@@ -0,0 +1,23 @@
++module.exports=async({page,check,assert,out})=>{
++  for(const position of ['top','bottom']) await check('F2P::inner-backdrop-'+position,async()=>{
++    const result=await page.evaluate(position=>{
++      const canvas=document.createElement('canvas');canvas.width=500;canvas.height=240;document.body.append(canvas);
++      const c=new Chart(canvas,{type:'line',data:{labels:['a','b','c'],datasets:[{data:[1,2,3]}]},
++        options:{responsive:false,animation:false,plugins:{legend:{display:false}},scales:{x:{position,
++          ticks:{align:'inner',showLabelBackdrop:true,backdropColor:'yellow',color:'green',maxRotation:0,autoSkip:false,
++            callback:()=> 'FOO'}}}}});
++      const items=c.scales.x.getLabelItems();
++      const values=items.map(t=>{const b=t.options.backdrop;return {align:t.options.textAlign,left:b.left,
++        width:b.width,textWidth:b.width-4,translation:t.options.translation,label:t.label};});
++      return values;
++    },position);
++    await page.screenshot({path:out+'/backdrop-'+position+'.png'});
++    const last=result.at(-1),middle=result[1];
++    assert.ok(Math.abs(last.left+last.textWidth+2)<0.01,
++      'Rightmost inner label backdrop must cover the text to the left of its tick');
++    assert.ok(Math.abs(middle.left+middle.textWidth/2+2)<0.01,
++      'Middle inner label backdrop must be centered underneath its text');
++    assert.equal(result[0].left,-2,'First label must retain its left-aligned backdrop');
++    await page.evaluate(()=>{Object.values(Chart.instances).forEach(c=>c.destroy());document.querySelectorAll('canvas').forEach(c=>c.remove());});
++  });
++};

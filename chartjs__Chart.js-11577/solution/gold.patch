@@ -1,0 +1,18 @@
+diff --git a/src/core/core.scale.js b/src/core/core.scale.js
+index 8b8bf34729253f3f2a39bf61659bef4ca47e1345..3265e103d1a8c4f80c9cbeed780e662f66932018 100644
+--- a/src/core/core.scale.js
++++ b/src/core/core.scale.js
+@@ -1288,6 +1288,13 @@ export default class Scale extends Element {
+         case 'right':
+           left -= width;
+           break;
++        case 'inner':
++          if (i === ilen - 1) {
++            left -= width;
++          } else if (i > 0) {
++            left -= width / 2;
++          }
++          break;
+         default:
+           break;
+         }

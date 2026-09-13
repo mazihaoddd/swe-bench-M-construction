@@ -1,0 +1,138 @@
+{
+  "FAIL_TO_PASS": [
+    "F2P::sequential-colored-tspans-default-size",
+    "F2P::sequential-colored-tspans-larger-font"
+  ],
+  "PASS_TO_PASS": [
+    "P2P::text layoutText Should render empty text",
+    "P2P::text layoutText Should render aligned left text by default",
+    "P2P::text layoutText Should render aligned left text",
+    "P2P::text layoutText Should render aligned right text",
+    "P2P::text layoutText Should render aligned center text",
+    "P2P::text layoutText Should render single line justified text aligned to the left",
+    "P2P::text layoutText Should render multiline justified text correctly aligned",
+    "P2P::text layoutText Should render maxLines",
+    "P2P::text layoutText should allow hyphenation callback to be overriden"
+  ],
+  "command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "full"
+  ],
+  "baseline_command": [
+    "node",
+    "/opt/iid/run.cjs",
+    "baseline"
+  ],
+  "log_parser": {
+    "kind": "json",
+    "report_path": ".iid-results/results.json"
+  },
+  "test_timeout_sec": 600,
+  "protected_paths": [
+    ".iid/f2p.cjs"
+  ],
+  "p2p_files": [
+    "packages/layout/tests/text/layoutText.test.js"
+  ],
+  "f2p_cases": {
+    "F2P::sequential-colored-tspans-default-size": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "实际图的黑色和红色字形重叠；期望图按黑色 test、红色 test、黑色 1234 从左向右排列。",
+      "failure_regex": "Adjacent colored tspans must advance"
+    },
+    "F2P::sequential-colored-tspans-larger-font": {
+      "file": ".iid/f2p.cjs",
+      "requirement": "实际图的黑色和红色字形重叠；期望图按黑色 test、红色 test、黑色 1234 从左向右排列。",
+      "failure_regex": "Adjacent colored tspans must advance"
+    }
+  },
+  "fixture_sha256": {},
+  "repo": "diegomura/react-pdf",
+  "instance_id": "diegomura__react-pdf-2961",
+  "base_commit": "06875b7dfcb74bb0e487920184981cde4cb3b881",
+  "images": [
+    {
+      "source_url": "https://github.com/user-attachments/assets/6943a290-8d53-4428-b5ab-00292c829bf7",
+      "repo_path": "assets/diegomura__react-pdf-2961/issue-01.png",
+      "width": 69,
+      "height": 44,
+      "format": "PNG",
+      "sha256": "42458398ba051d57fd8ee42984bc14ced00492480bb4ec6b0fa569bbd6797de8",
+      "role": "actual",
+      "visual_evidence": "实际图的黑色和红色字形重叠；期望图按黑色 test、红色 test、黑色 1234 从左向右排列。",
+      "information_gain": "图片展示相邻文本的视觉间距、颜色顺序和共同基线，可区分横向推进与仅仅改变颜色或垂直错开。",
+      "without_image": "不看图片，图片展示相邻文本的视觉间距、颜色顺序和共同基线，可区分横向推进与仅仅改变颜色或垂直错开。",
+      "linked_test_ids": [
+        "F2P::sequential-colored-tspans-default-size",
+        "F2P::sequential-colored-tspans-larger-font"
+      ]
+    },
+    {
+      "source_url": "https://github.com/user-attachments/assets/ce288cf8-d839-4813-ad22-1f21f2e30cc0",
+      "repo_path": "assets/diegomura__react-pdf-2961/issue-02.png",
+      "width": 137,
+      "height": 44,
+      "format": "PNG",
+      "sha256": "da9ea805044b3d0651954c9619bd036ef9f28e34490e5790502c28cf19f5ad8f",
+      "role": "expected",
+      "visual_evidence": "实际图的黑色和红色字形重叠；期望图按黑色 test、红色 test、黑色 1234 从左向右排列。",
+      "information_gain": "图片展示相邻文本的视觉间距、颜色顺序和共同基线，可区分横向推进与仅仅改变颜色或垂直错开。",
+      "without_image": "不看图片，图片展示相邻文本的视觉间距、颜色顺序和共同基线，可区分横向推进与仅仅改变颜色或垂直错开。",
+      "linked_test_ids": [
+        "F2P::sequential-colored-tspans-default-size",
+        "F2P::sequential-colored-tspans-larger-font"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "repo_path": "assets/diegomura__react-pdf-2961/reproduce.cjs",
+      "source_url": "https://react-pdf.org/repl?code=3187b0760ce02e004042027101ac0a6600a8400e04330c02f0c00500944407ca405030c00f002223002b80b6e9495df6300157007354bdfbf06019401bb0f11324654003d60ac2008802300064d300279680ccfa162a539f2528a9a0300f458f180b9718bfc31a218036a88400de4130006600967e7e005c309a08a800260600bea9b6f6504e5e6e7c1e9ed604be01c1a191d1719a00467eb8c0c86919da004c26002c3945ee1239aa3cf9928eb2f2834e42a20a4e2cec5c60036400dc3434004aa8f550024c00620074896049a808240c8828e8b9308e944b344000",
+      "sha256": "5e3cdce8772c30cbeb9ac923e6871ace904b3f8ee99c7204eac59322c2600d71",
+      "instructions": "Run node /testbed/assets/diegomura__react-pdf-2961/reproduce.cjs from /testbed; inspect .reproduction output. Uses the checked-out source and installed dependencies, with no network."
+    }
+  ],
+  "protected_files": {
+    ".iid/f2p.cjs": null,
+    "packages/layout/tests/text/layoutText.test.js": "ae74650102051478c7e1142afd3b14ab6cd680322452ad3236ed35a9d89f9ade"
+  },
+  "source": {
+    "repo": "diegomura/react-pdf",
+    "pr_number": 2961,
+    "created_at": "2024-11-18T16:44:41Z",
+    "merged_at": "2025-02-06T00:02:13Z",
+    "cutoff": "2026-09-13T00:00:00Z",
+    "pr_url": "https://github.com/diegomura/react-pdf/pull/2961",
+    "base_commit": "06875b7dfcb74bb0e487920184981cde4cb3b881",
+    "head_commit": "a6cf9f9cda0e9f8c46e9041737a17d73b1e507c3",
+    "issue_urls": [
+      "https://github.com/diegomura/react-pdf/issues/2931"
+    ],
+    "root_task_id": "https://github.com/diegomura/react-pdf/issues/2931",
+    "retrieved_at": "2026-09-13T02:35:07.143288+00:00"
+  },
+  "review": {
+    "approved": true,
+    "reviewer": "User (explicit approval in conversation)",
+    "reviewed_at": "2026-09-13T03:40:20.123367+00:00",
+    "checks": [
+      "atomic_production_fix",
+      "dedup_reviewed",
+      "gold_matches_upstream",
+      "p2p_preserved",
+      "pre_fix_context",
+      "real_issue_pr",
+      "unambiguous_requirements",
+      "visual_information_gain"
+    ],
+    "subject_sha256": "9d0332c94bf038829e979b73171d8c5b76823940c457911ab987676dba635e7d"
+  },
+  "tags": {
+    "framework": "React PDF",
+    "renderer": "PDF text layout",
+    "defect": "彩色 Tspan 排列",
+    "difficulty": "medium"
+  },
+  "patch_fingerprint": "1d9b50a210b0f81824545e3d6d9bb3737a18466380385435510ac20a06b8ffbb"
+}
